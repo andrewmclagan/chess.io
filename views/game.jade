@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	h3 Game
+	include _board
+	h3 Chat
+	include _chat
+	div#create-user(style='display:none;')
+		label Username:
+			input#username(name='username')
+		button#send-user Join
+		

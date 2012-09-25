@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	h1 Create Game
+	div
+		label Game name: 
+			input#game-name(type='text',name='game-name')
+	div
+		label Private Game:
+			input#game-private(type='checkbox',name='game-private')
+	button#game-create Create Game
+		

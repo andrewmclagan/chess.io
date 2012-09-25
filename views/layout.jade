@@ -1,0 +1,16 @@
+doctype 5
+html
+  head
+    title= screen
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/jquery.min.js')
+    script(src='/javascripts/app.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/screen.' + screen + '.js')
+    script
+        $.app.screen = new #{screen}Screen;
+        $.app.construct();
+        jQuery(document).ready(function () { $.app.ready();	})
+        jQuery(window).load(function () { $.app.load();	})	
+  body
+    block content
