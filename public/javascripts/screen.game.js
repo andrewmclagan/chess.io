@@ -1,39 +1,7 @@
-/*
- * Cast screen, displays the cast UI
- * @package touchCast
- * @author Andrew McLagan
-*/
-
 function gameScreen() {}
 
 gameScreen.prototype = {
-	
-	// executed as constructor
-	construct: function() {
-		
-		// game state vars 
-		this.board =	[	[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null],
-							[null,null,null,null,null,null,null,null]	];
-		this.teamACaptured =	[];
-		this.teamBCaptured =	[];
-		this.settings =			[];
-		this.gameTime =			null;
-		this.moveTime =			null;
 
-		// define socket listners
-		this.socket.on('chatUpdate', this.chatUpdate.bind(this));
-		this.socket.on('gameUpdate', this.gameUpdate.bind(this));
-		
-		// connect to game server
-		this.gameConnect(prompt('username'));
-	},
-	
 	// executed on DOM ready
     ready: function () { 
 	
@@ -46,26 +14,7 @@ gameScreen.prototype = {
     load: function () {
 		
 	},	
-	
-	// connect to the game server
-	gameConnect: function(username) {
-	
-		this.socket.emit('playerConnect',{ username: username });
-	},
-	
-	// updates the game board
-	gameUpdate: function(data) {
-
-		this.board = data.board;
-		this.renderGameBoard(this.board);
-	},
-	
-	// updates the chat board
-	chatUpdate: function(data) {
-
-		this.renderChatBoard(data.username,data.message);
-	},
-	
+		
 	// send a chat message
 	chatSend: function() {
 
@@ -77,72 +26,6 @@ gameScreen.prototype = {
 		this.socket.emit('chatSend',{ message: message });
 	},
 	
-	calculateMoves: function(position) {
-	
-		// retrueve piece
-		var piece = this.board[position[0],position[1]];
-	
-		// is this players piece ?
-		if( 1 ) {
-			
-			var validPositions = [];
-			
-			// calculate all valid moves for this piece
-			if(Piece.type == 'PAWN') {
-				//forward
-				//diagonal forward right
-				//diagonal forward left
-			}
-			if(Piece.type == 'ROOK') {
-				//forward
-				//left
-				//backwards
-				//right
-			}
-			if(Piece.type == 'KNIGHT') {
-				//forward 2 left 1
-				//forward 1 left 2
-				//forward 2 right 1
-				//forward 1 right 2
-				//backward 2 left 1
-				//backward 1 left 2
-				//backward 2 right 1
-				//backward 1 right 2								
-			}
-			if(Piece.type == 'BISHOP') {
-				//diagonal forward right
-				//diagobal backwards right
-				//diagonal backwards left
-				//diagonal forwards right
-			}
-			if(Piece.type == 'QUEEN') {
-				// forwards
-				// forwards diagonal right 
-				// right
-				// backwards diagonal right
-				// backwards
-				// backwards diagonal left
-				// left
-				// forwards diagonal left
-			}
-			if(Piece.type == 'KING') {
-				// forwards
-				// forwards diagonal right 
-				// right
-				// backwards diagonal right
-				// backwards
-				// backwards diagonal left
-				// left
-				// forwards diagonal left			
-			}			
-		}
-	},
-	
-	
-	
-	//////// maybe move these rener funcs to their own file and object and sctructure, totally encapsulated
-	//////////////////
-	//////////////////
 	renderGameBoard: function(board) {
 
 		// cache jquery nodes

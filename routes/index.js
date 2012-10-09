@@ -1,7 +1,6 @@
 // includes and inits
 var mongoose = require('mongoose'),
-	db = mongoose.createConnection('localhost', 'game'),
-	Chat = require('../models/Chat').Chat(db);
+	db = mongoose.createConnection('localhost', 'game');
 
 // Login
 app.get('/', function(req, res){
