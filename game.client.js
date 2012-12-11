@@ -51,8 +51,8 @@ gameClient.prototype = {
 		// this.socket.emit('chatSend', { message: message });
 	},
 
-	/* sends the game state to the server */
-	gameDispatch: function() {
+	/* sends move request to the server */
+	moveRequest: function() {
 
 		// this.getGameState();
 	}

@@ -12,18 +12,20 @@ gameCore.prototype = {
 					  0,  0,  0,  0,  0,  0,  0,  0,
 					  1,  1,  1,  1,  1,  1,  1,  1,
 					  2,  3,  4,  5,  6,  4,  3,  2]),
-	pieceMap: 	{1: { type: 'PAWN',	colour: 'WHITE' },
-			2: { type: 'ROOK', 	colour: 'WHITE' },
-			3: { type: 'KNIGHT', 	colour: 'WHITE' },
-			4: { type: 'BISHOP', 	colour: 'WHITE' },
-			5: { type: 'QUEEN', 	colour: 'WHITE' },
-			6: { type: 'KING', 	colour: 'WHITE' },
-			7: { type: 'PAWN', 	colour: 'BLACK' },
-			8: { type: 'ROOK', 	colour: 'BLACK' },
-			9: { type: 'KNIGHT', 	colour: 'BLACK' }, 
-			10: { type: 'BISHOP', 	colour: 'BLACK' },
-			11: { type: 'QUEEN', 	colour: 'BLACK' },
-			12: { type: 'KING', 	colour: 'BLACK' } },
+
+	pieceMap: 	{1: { type: 'PAWN',		colour: 'WHITE' },
+				2: 	{ type: 'ROOK', 	colour: 'WHITE' },
+				3: 	{ type: 'KNIGHT', 	colour: 'WHITE' },
+				4: 	{ type: 'BISHOP', 	colour: 'WHITE' },
+				5: 	{ type: 'QUEEN', 	colour: 'WHITE' },
+				6: 	{ type: 'KING', 	colour: 'WHITE' },
+				7: 	{ type: 'PAWN', 	colour: 'BLACK' },
+				8: 	{ type: 'ROOK', 	colour: 'BLACK' },
+				9: 	{ type: 'KNIGHT', 	colour: 'BLACK' }, 
+				10: { type: 'BISHOP', 	colour: 'BLACK' },
+				11: { type: 'QUEEN', 	colour: 'BLACK' },
+				12:	{ type: 'KING', 	colour: 'BLACK' } },
+
 	whiteCaptured:	new Uint8Array(16),
 	blackCaptured:	new Uint8Array(16),
 	gameTime:	null,
@@ -31,17 +33,15 @@ gameCore.prototype = {
 	currentPlayer:	'WHITE',
 	WPlayerID:	null,
 	BPlayerID:	null,
-	ID:		'',
+	gameID:		'',
 	gameTitle:	'No Title',
-	private:	false, 
-	moveCache:	null,
+	private:	false,
 	
 	/* object constructor */
 	constructor: function(gameState) {
 
-		if(gameState.ID == null) {	// if new game
+		if(gameState.ID == null) 	// if new game
 			this.ID = this.GUID();
-		}
 		this.updateGameState(gameState);
 	},
 
@@ -150,15 +150,15 @@ gameCore.prototype = {
 		}
 	},
 	
-	/* Return a movement paths for a piece from the DB */
+	/* Return movement paths for a piece from the DB */
 	getMovePaths: function(piece, curPos) {
 	
 	},
 
-        /* Return a movement path for a piece from the DB */
-        getMovePath: function(piece, curPos, destPos) {
+    /* Return a movement path for a piece from the DB */
+    getMovePath: function(piece, curPos, destPos) {
 
-        }
+    },
 
 	/* Returns parts of the gameState that have changed since last update */
 	getGameState: function() {
@@ -172,12 +172,15 @@ gameCore.prototype = {
 			currentPlayer: this.currentPlayer,
 			ID: this.ID,
 			private: this.private,	
-		}
+		};
 	},
 
 	/* updates the game state vars */
 	updateGameState: function(gameState) {
 		
+		// do game states match?
+		if(gameState == this.getGameState())
+			// init
 		var length = gameState.length;
 		for(var i = 0; i < length; i++ ) {
 			if(gameState[i] !== null) 
@@ -186,19 +189,19 @@ gameCore.prototype = {
 	},
 
 	/* Return a piece from a binary piece code */
-        getPiece: function(pieceCode) {
+    getPiece: function(pieceCode) {
 		return this.pieceMap[pieceCode];
-        },
+    },
 	
-	// generates a random GUID string
-        GUID: function() {
+	/* generates a random GUID string */
+    GUID: function() {
 
-                var S4 = function () {
-                        return Math.floor( Math.random() * 0x10000 ).toString(16); /* 65536 */
-                };
+    	var S4 = function () {
+    	    return Math.floor( Math.random() * 0x10000 ).toString(16); /* 65536 */
+        };
 
-                return ( S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4() );
-        }
+        return ( S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4() );
+    }
 }	
 
 // export

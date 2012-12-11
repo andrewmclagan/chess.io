@@ -35,7 +35,7 @@ require('./routes');
  * Init HTTP and Game server
  */ 
 var http = http.createServer(app).listen(80); // http server
-var gameServer = require('./lib/gameServer').gameServer(http);  // game server
+var gameServer = require('./game.server').gameServer(http);  // game server
 
 
 /**
